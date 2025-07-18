@@ -15,15 +15,17 @@
       justify-content: center;
       align-items: center;
       min-height: 100vh;
+      overflow: hidden;
     }
 
     .container {
       text-align: center;
-      max-width: 400px;
+      max-width: 420px;
       padding: 2rem;
       background-color: #1e1e1e;
       border-radius: 20px;
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+      box-shadow: 0 0 30px rgba(255, 255, 255, 0.05);
+      animation: fadeIn 1.2s ease-in-out;
     }
 
     .profile-img {
@@ -33,48 +35,68 @@
       object-fit: cover;
       border: 3px solid #444;
       margin-bottom: 1rem;
+      animation: fadeIn 1.5s ease-in-out;
     }
 
     h1 {
       margin: 0.2rem 0;
-      font-size: 2rem;
+      font-size: 2.2rem;
       font-weight: bold;
+      animation: fadeIn 1.8s ease-in-out;
     }
 
     p {
-      margin-top: 0.5rem;
+      margin-top: 0.8rem;
       font-size: 1rem;
+      line-height: 1.6;
       color: #ccc;
+      animation: fadeIn 2s ease-in-out;
     }
 
     .buttons {
-      margin-top: 1.5rem;
+      margin-top: 2rem;
       display: flex;
       justify-content: center;
       gap: 1rem;
+      animation: fadeIn 2.2s ease-in-out;
     }
 
     .button {
       text-decoration: none;
-      padding: 0.6rem 1.2rem;
-      background-color: #333;
+      padding: 0.6rem 1.4rem;
+      background-color: #2c2c2c;
       border-radius: 8px;
       color: white;
-      transition: background-color 0.3s ease;
+      transition: background-color 0.3s ease, transform 0.2s ease;
       border: 1px solid #555;
     }
 
     .button:hover {
       background-color: #555;
+      transform: scale(1.05);
     }
 
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <img src="https://raw.githubusercontent.com/tulip-xmr/tulip/refs/heads/main/tulips.jpeg" alt="Profile Picture" class="profile-img" />
-    <h1>Tulip</h1>
-    <p>I'm a C#/.NET Developer, a reverse engineer and software enthusiast</p>
+    <h1>Tulip.</h1>
+    <p>
+      I'm a passionate <strong>C#/.NET developer</strong> with a strong foundation in building robust, scalable software solutions. 
+      I dive deep into the world of <strong>reverse engineering</strong> and enjoy dissecting binaries to understand how things tick. 
+      Tech enthusiast by heart, I constantly explore systems, tools, and low-level mechanics to push my skillset forward.
+    </p>
     
     <div class="buttons">
       <a href="https://discord.com/users/1395576493865963560" target="_blank" class="button">Discord</a>
