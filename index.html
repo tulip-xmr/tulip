@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Tulip | Profile</title>
   <style>
     body {
@@ -15,6 +15,7 @@
       justify-content: center;
       align-items: center;
       min-height: 100vh;
+      position: relative;
       overflow: hidden;
     }
 
@@ -86,22 +87,106 @@
         transform: translateY(0);
       }
     }
+
+    .audio-player {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      background-color: #1e1e1e;
+      border: 1px solid #444;
+      padding: 0.5rem 1rem;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      color: #ccc;
+      font-size: 0.9rem;
+      width: 280px;
+    }
+
+    .progress {
+      flex: 1;
+      height: 6px;
+      background-color: #333;
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background-color: #888;
+      transition: width 0.2s linear;
+    }
+
+    .play-btn {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
   </style>
 </head>
 <body>
   <div class="container">
     <img src="https://raw.githubusercontent.com/tulip-xmr/tulip/refs/heads/main/tulips.jpeg" alt="Profile Picture" class="profile-img" />
     <h1>Tulip.</h1>
-    <p>
-      I'm a passionate <strong>C#/.NET developer</strong> with a strong foundation in building robust, scalable software solutions. 
-      I dive deep into the world of <strong>reverse engineering</strong> and enjoy dissecting binaries to understand how things tick. 
-      Tech enthusiast by heart, I constantly explore systems, tools, and low-level mechanics to push my skillset forward.
-    </p>
+    <p>I'm Tulip 🌷 | C#/.NET Developer | HTML Developer | Reverse Engineer | Software Enthusiast</p>
     
     <div class="buttons">
       <a href="https://discord.com/users/1395576493865963560" target="_blank" class="button">Discord</a>
       <a href="mailto:tulip.xmr@gmail.com" class="button">Email</a>
     </div>
   </div>
+
+  <div class="audio-player">
+    <button class="play-btn" id="playPauseBtn">⏸</button>
+    <div class="progress">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+    <span id="timeLeft">0:00</span>
+  </div>
+
+  <audio id="audio" autoplay>
+    <source src="https://raw.githubusercontent.com/tulip-xmr/tulip/main/song.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    const audio = document.getElementById('audio');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const progressBar = document.getElementById('progressBar');
+    const timeLeft = document.getElementById('timeLeft');
+
+    function formatTime(seconds) {
+      const mins = Math.floor(seconds / 60);
+      const secs = Math.floor(seconds % 60);
+      return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+    }
+
+    playPauseBtn.addEventListener('click', () => {
+      if (audio.paused) {
+        audio.play();
+        playPauseBtn.textContent = '⏸';
+      } else {
+        audio.pause();
+        playPauseBtn.textContent = '▶️';
+      }
+    });
+
+    audio.addEventListener('timeupdate', () => {
+      const progress = (audio.currentTime / audio.duration) * 100;
+      progressBar.style.width = `${progress}%`;
+      const timeRemaining = audio.duration - audio.currentTime;
+      timeLeft.textContent = formatTime(timeRemaining);
+    });
+
+    audio.addEventListener('ended', () => {
+      playPauseBtn.textContent = '▶️';
+    });
+  </script>
 </body>
 </html>
